@@ -1,15 +1,15 @@
-#include <trickyLib/tricky.hpp>
+#include "core/GameController.hpp"
+#include "ui/GameUI.hpp"
 
-int main(int argc, char *argv[]) {
+int main() {
+  // 1. Instanciar el Core (Lógica)
+  Core::GameController game;
 
-    Tricky::Tablero triky;
+  // 2. Instanciar la UI (Presentación) inyectándole el Core
+  UI::GameUI ui(game);
 
-    Tricky::Player tanuk{"Tanuk"};
-    Tricky::Player player2{"Player2"};
+  // 3. Correr la aplicación
+  ui.run();
 
-    triky.setPlayer({tanuk, player2});
-
-    triky.start();
-
-    return 0;
+  return 0;
 }

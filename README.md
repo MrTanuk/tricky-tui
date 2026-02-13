@@ -1,94 +1,87 @@
 # 🎮 Tricky (Tic-Tac-Toe)
 
-> A modern, terminal-based Tic-Tac-Toe game built with C++ and FTXUI.
+> A modern, terminal-based Tic-Tac-Toe game built with **C++23** and **FTXUI**, featuring a clean **MVC Architecture**.
 
-**Tricky** is a console application that reimagines the classic "Tres en Raya" game. Unlike standard command-line games, Tricky uses **FTXUI** to provide a fully interactive interface with mouse support, dynamic layouts, and a responsive design within your terminal.
+**Tricky** reimagines the classic "Tres en Raya" for the terminal. Unlike standard command-line games, it offers a responsive TUI (Text User Interface) with mouse support, keyboard navigation, and a scalable codebase designed with modern software engineering practices.
 
 ## ✨ Features
 
-- **Interactive UI:** Clickable board buttons using the mouse.
-- **Score Tracking:** Real-time updates of Wins and Losses for both players.
-- **Game States:** Automatic detection of Win, Loss, and Draw (Empate) conditions.
-- **Smart Menus:** Context-aware menus that appear only when the game ends.
-- **Modern C++:** Written in C++17 using clean code practices (Enums, separating logic/UI).
-- **Cross-Platform:** Runs on Linux, macOS, and Windows (via terminal).
+- **🛡️ Modern C++23:** Utilizes cutting-edge features like `std::expected`, `std::span`, `concepts`, and `std::format`.
+- **🏗️ Clean Architecture:** Strict separation of concerns using the **Model-View-Controller (MVC)** pattern.
+    - **Core:** Pure logic, zero UI dependencies.
+    - **UI:** Reactive rendering layer.
+- **🖱️ Interactive UI:** Full mouse and keyboard support within the terminal.
+- **🎨 Dynamic Layout:** Responsive grid with real-time state updates.
+- **📊 Score Tracking:** Persistent scoreboard during the session.
 
-## 📸 Preview
+## 📐 Architecture
 
-https://github.com/user-attachments/assets/524aa424-f85c-428d-80fa-47a123781063
+The project is structured to ensure scalability and maintainability:
+
+```mermaid
+graph TD
+    User(("User")) <--> UI["Presentation Layer (FTXUI)"]
+    UI <--> Controller["Application Layer (GameController)"]
+    Controller <--> Domain["Domain Layer (Board & Rules)"]
+```
+
+- **Domain (`Core::Board`):** Holds the grid state and validates rules.
+- **Application (`Core::GameController`):** Manages game flow, turns, and score.
+- **Presentation (`UI::GameUI`):** Renders the interface and captures input.
 
 ## 🛠️ Prerequisites
 
-To build this project, you need:
-
-- **C++ Compiler:** Supporting C++17 or later (GCC, Clang, MSVC).
-- **CMake:** Version 3.20 or higher.
-- **Git:** To fetch the repository and dependencies.
+- **C++ Compiler:** GCC 13+, Clang 16+, or MSVC (VS2022) with C++23 support.
+- **CMake:** Version 3.25 or higher.
+- **Git:** To fetch dependencies.
 
 ## 🚀 Building and Running
 
 1.  **Clone the repository:**
-
     ```bash
     git clone https://github.com/MrTanuk/tricky-tui.git
     cd tricky-tui
     ```
 
-2.  **Create a build directory:**
-
+2.  **Configure and Compile:**
     ```bash
     mkdir build && cd build
-    ```
-
-3.  **Configure and Compile:**
-
-    ```bash
     cmake ..
     cmake --build .
     ```
 
-4.  **Run the game:**
+3.  **Run the game:**
     ```bash
-    ./app/app
+    ./app/tricky_app
     ```
 
 ## 🕹️ Controls
 
-- **Mouse:** Click on the grid cells to place your mark (X or O).
-- **Keyboard (Menu):**
-  - Use `UP` / `DOWN` arrows to navigate the "Game Over" menu.
-  - Press `ENTER` to select an option.
+| Input | Action |
+|-------|--------|
+| **Mouse Left Click** | Place Mark (X/O) or Select Menu Option |
+| **Arrow Keys** | Navigate the Grid or Menu |
+| **Enter** | Confirm Selection |
 
 ## 📂 Project Structure
 
-The project follows a modular architecture separating logic from the interface.
-
-```
+```text
 .
 ├── app/
-│   └── main.cpp       # Entry point
+│   └── main.cpp          # Dependency Injection entry point
 ├── include/
-│   └── trickyLib/
-│       └── tricky.hpp # Class definitions (Player, Tablero)
+│   ├── core/             # Business Logic (Headers)
+│   └── ui/               # Presentation Logic (Headers)
 ├── src/
-│   └── tricky.cpp     # Implementation of logic and UI rendering
-└── CMakeLists.txt     # Build configuration
+│   ├── core/             # Implementation of Board & Controller
+│   └── ui/               # Implementation of FTXUI Rendering
+└── CMakeLists.txt        # Modern CMake configuration
 ```
-
-## 🗺️ Roadmap
-
-- [x] Basic Game Logic (Win/Draw detection).
-- [x] Interactive UI with FTXUI.
-- [x] Scoreboard system.
-- [x] Replay/Exit Menu.
-- [ ] **Upcoming:** Input screens for Player Names (Login UI).
-- [ ] **Upcoming:** Multiplayer local
-- [ ] **Upcoming:** AI implementation for single-player mode.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the game logic or UI.
+Contributions are welcome! Whether it's implementing an AI player or adding network support.
 
 ## 📝 License
 
-This project is open-source. Feel free to use it for educational purposes.
+This project is licensed under the MIT License.
